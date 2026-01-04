@@ -197,11 +197,11 @@ export default function ProfessionalColorSuite() {
             <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-white">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,#e0e7ff_0%,rgba(255,255,255,0)_50%)]" />
                 <div className="relative z-10 text-center px-6 max-w-4xl">
-                    <h1 className="text-6xl font-geist md:text-8xl font-black tracking-tighter mb-6 bg-linear-to-b from-slate-900 to-slate-500 bg-clip-text text-transparent leading-none">
+                    <h1 className="text-6xl font-geist md:text-8xl font-black tracking-tighter mb-6 bg-linear-to-b from-slate-900 to-slate-700 bg-clip-text text-transparent leading-none">
                         Design with <br /> Perfect Precision.
                     </h1>
-                    <p className="text-xl text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-                        Transform any image into a production-ready color palette. Analyze contrast, adjust values, and export directly to your codebase.
+                    <p className="text-xl text-slate-500 mb-10 max-w-2xl mx-auto">
+                        Transform any image into a color palette. Everything happens locally in your browser—your images never leave your device.
                     </p>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                         <Button onClick={scrollToTool} size="lg" className="rounded-full h-14 px-10 bg-primary text-lg shadow-xl shadow-indigo-200">
@@ -227,11 +227,11 @@ export default function ProfessionalColorSuite() {
                                     r.readAsDataURL(file);
                                 }
                             }} className="absolute inset-0 opacity-0 cursor-pointer z-10" />
-                            <div className="w-24 h-24 bg-indigo-50 rounded-[2.5rem] flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                            <div className="w-24 h-24 bg-indigo-50 rounded-4xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-500">
                                 <HugeiconsIcon icon={ImageUploadIcon} size={40} />
                             </div>
-                            <h2 className="text-3xl font-bold text-slate-800">Drop your masterpiece</h2>
-                            <p className="text-slate-400 mt-3 text-lg">
+                            <h2 className="text-3xl font-bold text-slate-800">Upload Image</h2>
+                            <p className="text-slate-400 mt-3 text-md">
                                 Drag & drop, browse, or <span className="text-primary font-semibold underline underline-offset-4">paste your image</span>
                             </p>
                         </div>
@@ -239,21 +239,21 @@ export default function ProfessionalColorSuite() {
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                             {/* Left: Interactive Canvas */}
                             <div className="lg:col-span-7 space-y-8">
-                                    <div className="flex justify-between items-center mb-6 px-4">
-                                        <div className="flex items-center gap-4">
-                                            <div className="px-3 py-1 bg-primary text-accent rounded-full text-xs font-bold uppercase tracking-widest">
-                                                Active Session
-                                            </div>
+                                <div className="flex justify-between items-center mb-6 px-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="px-3 py-1 bg-primary text-accent rounded-full text-xs font-bold uppercase tracking-widest">
+                                            Active Session
                                         </div>
-                                        <Button
-                                            onClick={() => setImage(null)}
-                                            variant="ghost"
-                                            className="rounded-xl text-slate-500 hover:text-red-500 hover:bg-red-50 gap-2 transition-all"
-                                        >
-                                            <HugeiconsIcon icon={RefreshIcon} size={18} />
-                                            <span>Restart Project</span>
-                                        </Button>
                                     </div>
+                                    <Button
+                                        onClick={() => setImage(null)}
+                                        variant="ghost"
+                                        className="rounded-xl text-slate-500 hover:text-red-500 hover:bg-red-50 gap-2 transition-all"
+                                    >
+                                        <HugeiconsIcon icon={RefreshIcon} size={18} />
+                                        <span>Restart Project</span>
+                                    </Button>
+                                </div>
                                 <div className="relative bg-white p-4 rounded-[3.5rem] shadow-2xl shadow-slate-200/60 border border-slate-100">
                                     <div
                                         className="relative rounded-[2.5rem] overflow-hidden bg-slate-100 cursor-none group"
@@ -279,14 +279,14 @@ export default function ProfessionalColorSuite() {
                                 </div>
 
                                 {/* Dynamic Palette Generation */}
-                                <div className="bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm flex items-center gap-6">
-                                    <div className="p-3 bg-slate-50 rounded-2xl text-slate-400"><HugeiconsIcon icon={ColorsIcon} /></div>
-                                    <div className="flex gap-4 flex-1">
+                                <div className="bg-white p-4 rounded-full border border-slate-100 w-fit shadow-sm flex items-center gap-4">
+                                    <div className="p-3 bg-slate-50 rounded-full text-slate-400"><HugeiconsIcon icon={ColorsIcon} /></div>
+                                    <div className="flex gap-4">
                                         {palette.map((hex, i) => (
                                             <button key={i} onClick={() => {
                                                 const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
                                                 setColorData(calculateColorDetails(r, g, b));
-                                            }} className="h-16 flex-1 rounded-2xl border border-black/5 hover:scale-110 transition-all shadow-sm" style={{ backgroundColor: hex }} />
+                                            }} className="md:size-14 size-9 flex-1 rounded-full border border-black/5 hover:scale-110 transition-all shadow-sm" style={{ backgroundColor: hex }} />
                                         ))}
                                     </div>
                                 </div>
@@ -305,13 +305,28 @@ export default function ProfessionalColorSuite() {
                                             </TabsTrigger>
                                         </TabsList>
 
-                                        <TabsContent value="adjust" className="space-y-8 ">
+                                        <TabsContent value="adjust" className="space-y-4">
                                             {/* Live Preview Area */}
-                                            <div className="flex items-center gap-8 mb-4">
-                                                <div className="size-10 rounded-full shadow-inner border border-black/5" style={{ backgroundColor: colorData.hex }} />
+                                            <div className="flex items-center gap-4 mb-4">
+                                                <div className="md:size-10 size-8 rounded-full shadow-inner border border-black/5" style={{ backgroundColor: colorData.hex }} />
                                                 <div className="flex-1">
                                                     <span className="text-[11px] font-black uppercase tracking-widest text-primary block mb-1">Active Selection</span>
-                                                    <h3 className="text-5xl font-black text-slate-800 uppercase tracking-tighter">{colorData.hex}</h3>
+                                                    <div className="flex items-center gap-3">
+                                                        <h3 className="md:text-5xl text-3xl font-black text-slate-800 uppercase tracking-tighter">{colorData.hex}</h3>
+                                                        <button
+                                                            onClick={() => {
+                                                                navigator.clipboard.writeText(colorData.hex);
+                                                                setCopied(colorData.hex);
+                                                                setTimeout(() => setCopied(null), 2000);
+                                                            }}
+                                                            className={cn(
+                                                                "p-2 rounded-xl transition-all",
+                                                                copied === colorData.hex ? "bg-green-500 text-white" : "bg-slate-50 text-slate-400 hover:bg-slate-100"
+                                                            )}
+                                                        >
+                                                            <HugeiconsIcon icon={copied === colorData.hex ? Tick01Icon : Copy01Icon} />
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -358,11 +373,11 @@ export default function ProfessionalColorSuite() {
                                 </div>
 
                                 {/* Quick History History */}
-                                <div className="bg-white p-8 rounded-[3rem] border border-slate-100">
+                                <div className="bg-white p-8 rounded-4xl border border-slate-100">
                                     <div className="flex justify-between items-center mb-6">
                                         <span className="text-xs font-black text-slate-400 flex items-center gap-2"><HugeiconsIcon icon={Time02Icon} size={16} /> SESSION HISTORY</span>
                                     </div>
-                                    <div className="grid grid-cols-6 gap-3">
+                                    <div className="grid grid-cols-6  gap-3">
                                         {history.map((h, i) => (
                                             <button key={i} onClick={() => {
                                                 const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16);
